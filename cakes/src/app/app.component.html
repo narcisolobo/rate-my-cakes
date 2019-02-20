@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg py-0 fixed-top shadow bg-white">
+  <p class="h2 mr-auto mt-2 mb-1 coiny" href="/">RATE MY MOTHAFUCKIN CAKES!</p>
+</nav>
+<main style="padding-top: 50px;">
+  <div class="d-flex p-3">
+    <div class="p-3 border border-white border-2 rounded mr-3" style="width: 250px;">
+      <h5 class="coiny text-white">Add a New Cake:</h5>
+      <form (submit)="createCake(newCake)">
+        <div class="form-group">
+          <label for="title">Title of Cake:</label>
+          <input name="newCake.title" [(ngModel)]="newCake.title" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="baker">Baker:</label>
+          <input name="newCake.baker" [(ngModel)]="newCake.baker" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="imageURL">Link to Photo:</label>
+          <input name="newCake.imageURL" [(ngModel)]="newCake.imageURL" type="text" class="form-control" />
+        </div>
+        <button class="btn btn-light btn-block">Submit</button>
+      </form>
+    </div>
+    <div *ngIf="cakes.length > 0" class="p-3 border border-white border-2 rounded mr-3">
+      <h5 class="coiny text-white">Rate These Mothafuckin Cakes:</h5>
+      <form (submit)="createComment(newComment, cake._id)" *ngFor="let cake of cakes" class="bg-white rounded p-3 mb-3">
+        <input type="hidden" name="cakeId" value="{{ cake._id }}">
+        <a (click)="getCake(cake._id)"><img class="img-thumbnail thumb mb-2" src="{{ cake.imageURL }}" alt=""></a>
+        <div class="form-group w400 mb-3">
+          <label for="rating">Your Rating:</label>
+          <select name="newComment.rating" [(ngModel)]="newComment.rating" class="form-control">
+            <option *ngFor="let rating of ratings" value="{{ rating }}">{{ rating }} Star(s)</option>
+          </select>
+        </div>
+        <div class="form-group w400 mb-3">
+          <label for="content">Your Comment:</label>
+          <textarea name="newComment.content" [(ngModel)]="newComment.content"class="form-control" rows="2"></textarea>
+        </div>
+        <button class="btn btn-outline-primary w400">Submit</button>
+      </form>
+    </div>
+    <app-cake-details *ngIf="selectedCake" [cakeToShow]="selectedCake"></app-cake-details>
+  </div>
+</main>

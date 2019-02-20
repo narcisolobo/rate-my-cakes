@@ -1,0 +1,8 @@
+<div class="p-3 flex-fill border border-white border-2 rounded">
+  <h5 class="coiny text-white">Cake Details:</h5>
+  <div class="bg-white rounded p-3 clearfix">
+    <h5>{{ cakeToShow.title }} - Average Rating: {{ average }} Stars</h5>
+    <img src="{{ cakeToShow.imageURL }}" alt="" class="full img-thumbnail float-left mr-3 mb-3">
+    <p *ngFor="let comment of cakeToShow.comments" class="pl-3">{{ comment.content }} - {{ comment.rating }} star(s)!</p>
+  </div>
+</div>
